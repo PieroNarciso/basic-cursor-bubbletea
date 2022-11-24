@@ -29,13 +29,21 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "ctrl+c", "q":
 			return m, tea.Quit
 		case "j", tea.KeyDown.String():
-			m.posY++
+			if m.posY+1 < m.height-1 {
+				m.posY++
+			}
 		case "k", tea.KeyUp.String():
-			m.posY--
+			if m.posY-1 >= 0 {
+				m.posY--
+			}
 		case "h", tea.KeyLeft.String():
-			m.posX--
+			if m.posX-1 >= 0 {
+				m.posX--
+			}
 		case "l", tea.KeyRight.String():
-			m.posX++
+			if m.posX+1 < m.width-1 {
+				m.posX++
+			}
 		}
 	case tea.WindowSizeMsg:
 		m.height = msg.Height
